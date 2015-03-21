@@ -1,0 +1,9 @@
+services:     
+    dakinquelia.groupdisplaytopic.listener:
+        class: dakinquelia\groupdisplaytopic\event\listener
+        arguments:
+            - @user
+            - %core.root_path%
+            - %core.php_ext%
+        tags:
+            - { name: event.listener }
