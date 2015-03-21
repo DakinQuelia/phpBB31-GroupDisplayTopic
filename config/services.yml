@@ -2,6 +2,7 @@ services:
     dakinquelia.groupdisplaytopic.listener:
         class: dakinquelia\groupdisplaytopic\event\listener
         arguments:
+            - @dbal.conn
             - @user
             - %core.root_path%
             - %core.php_ext%

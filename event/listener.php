@@ -18,6 +18,9 @@ class listener implements EventSubscriberInterface
 {
 	/** @var \phpbb\user */
 	protected $user;
+	
+	/** @var \phpbb\db\driver\driver_interface */
+	protected $db;
 
 	/** @var string phpBB root path */
 	protected $phpbb_root_path;
@@ -35,8 +38,9 @@ class listener implements EventSubscriberInterface
 	/**
 	* Instead of using "global $user;" in the function, we use dependencies again.
 	*/
-	public function __construct(\phpbb\user $user, $phpbb_root_path, $php_ext)
+	public function __construct(\phpbb\db\driver\driver_interface $db, \phpbb\user $user, $phpbb_root_path, $php_ext)
 	{
+		$this->db = $db;
 		$this->user = $user;
 		$this->root_path = $phpbb_root_path;
 		$this->php_ext = $php_ext;
@@ -50,8 +54,18 @@ class listener implements EventSubscriberInterface
 			include_once($this->phpbb_root_path . 'includes/functions_user.' . $this->php_ext);
 		}
 		
+		$post_row = $event['post_row'];
+		$poster_id = $event['poster_id'];
+		
+		$sql = 'SELECT group_id 
+				FROM ' . USERS_TABLE . '
+				WHERE user_id = ' . (int) $poster_id;
+		$result = $this->db->sql_query($sql);
+		$row = $this->db->sql_fetchrow($result);
+		$this->db->sql_freeresult($result);
+		
 		$event['post_row'] = array_merge($event['post_row'], array(
-			'POSTER_GROUP' => get_group_name($this->user->data['group_id']),
+			'POSTER_GROUP' => get_group_name($row['group_id']),
 		));
     }
 }

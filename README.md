@@ -20,4 +20,4 @@ This extension adds a group by default in profile in viewtopic.
 ## License
 [GNU General Public License v2](http://opensource.org/licenses/GPL-2.0)
 
-© 2014 - Daniel Chalsèche (Dakin Quelia)
+© 2015 - Daniel Chalsèche (Dakin Quelia)
