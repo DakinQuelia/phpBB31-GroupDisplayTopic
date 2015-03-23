@@ -54,7 +54,6 @@ class listener implements EventSubscriberInterface
 			include_once($this->phpbb_root_path . 'includes/functions_user.' . $this->php_ext);
 		}
 		
-		$post_row = $event['post_row'];
 		$poster_id = $event['poster_id'];
 		
 		$sql = 'SELECT group_id 

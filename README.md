@@ -3,7 +3,7 @@
 This extension adds a group by default in profile in viewtopic.
 
 ## Requirements
-* phpBB 3.1.0-RC3 or higher
+* phpBB 3.1.3 or higher
 * PHP 5.3.3 or higher
 
 ## Installation
